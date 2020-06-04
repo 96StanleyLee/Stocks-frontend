@@ -210,8 +210,12 @@ function PersistentDrawerLeft(props) {
         </div>
         <Divider />
         <List>
-          <ListItem><Button  color="inherit">Register</Button></ListItem>
-          <ListItem><Button onClick={()=>modalClick()} color="inherit">Login</Button></ListItem>
+          {Object.keys(props.user).length === 0? 
+                    <>
+                    <ListItem><Button  color="inherit">Register</Button></ListItem>
+                    <ListItem><Button onClick={()=>modalClick()} color="inherit">Login</Button></ListItem>
+                    </>
+              :<ListItem><Button  color="inherit">Logout</Button></ListItem>}
           {['Stocks', 'Portfolio'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon onClick={()=>console.log('hi')}>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>

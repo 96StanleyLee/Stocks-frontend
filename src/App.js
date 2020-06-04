@@ -28,7 +28,6 @@ function App() {
   }
 
   useEffect(()=>{
-
     const autoLogin = async()=>{
       let token = Cookies.get('token')
       let data = {token}
@@ -46,7 +45,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Route path="/" render={ routeProps => <Menu {...routeProps} setStock={setStock}/>}/>
+        <Route path="/" render={ routeProps => <Menu {...routeProps} user={user} setStock={setStock}/>}/>
         <Route exact path="/" render={routeProps => <Main stock="GOOGL"/>}/>
         <Route exact path="/stocks/:id" render={ routeProps => <Main {...routeProps} stock={stock}/>}/>
         <Route exact path="/login" render={() =><Login users={user} submit={submit} user={setUserfield} password={setPassword} />}/>
