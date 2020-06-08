@@ -22,6 +22,10 @@ import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import Login from '../container/Login'
+import {
+  BrowserRouter as Router,
+  Link
+} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -135,13 +139,7 @@ function PersistentDrawerLeft(props) {
 
 
 
-  const modalClick = () => {
-    setModal(true);
-  };
 
-  const modalClose = () => {
-    setModal(false);
-  };
 
   const handleEnter = (e) =>{
     if(e.key === "Enter"){
@@ -150,6 +148,15 @@ function PersistentDrawerLeft(props) {
       props.history.push(`/stocks/${e.target.value}`)
     }
   }
+
+  const redirectLogin = () =>{
+    props.history.push(`/login`)
+  }
+
+  const redirectReigster = () =>{
+    props.history.push(`/register`)
+  }
+
 
   
 
@@ -212,8 +219,8 @@ function PersistentDrawerLeft(props) {
         <List>
           {Object.keys(props.user).length === 0? 
                     <>
-                    <ListItem><Button  color="inherit">Register</Button></ListItem>
-                    <ListItem><Button onClick={()=>modalClick()} color="inherit">Login</Button></ListItem>
+                    <ListItem><Link to ='/register'><Button color="inherit">Register</Button></Link></ListItem>
+                    <ListItem><Button onClick={redirectLogin} color="inherit">Login</Button></ListItem>
                     </>
               :<ListItem><Button  color="inherit" onClick={props.logout}>Logout</Button></ListItem>}
           {['Stocks', 'Portfolio'].map((text, index) => (

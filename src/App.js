@@ -3,6 +3,7 @@ import './App.css';
 import Menu from './container/Menu'
 import Main from './container/Main'
 import Login from './container/Login'
+import Register from './container/Register'
 import axios from 'axios';
 import {
   BrowserRouter as Router,
@@ -20,9 +21,11 @@ function App() {
   const submit = async () =>{
     let data = {email: userfield, password: password}
     let response = await axios.post('http://localhost:4000/login',data)
+
+    //let data = await response.json()
     if(response.data){
       setUser(response.data.user)
-      Cookies.set('token', response.data.token)
+      Cookies.set('token', response.data.token, {expires: 7})
       console.log(Cookies.get('token'))
     }
   }
@@ -30,6 +33,8 @@ function App() {
 
   const logout = async () =>{
     let token = Cookies.get('token')
+    console.log(token)
+    // Cookies.remove('token')
     let response = await axios.post('http://localhost:4000/logout', {token})
     console.log(response)
   }
@@ -45,6 +50,11 @@ function App() {
   },[])
 
 
+  const register = () =>{
+
+
+  }
+
   
 
 
@@ -55,6 +65,8 @@ function App() {
         <Route exact path="/" render={routeProps => <Main stock="GOOGL"/>}/>
         <Route exact path="/stocks/:id" render={ routeProps => <Main {...routeProps} stock={stock}/>}/>
         <Route exact path="/login" render={() =><Login users={user} submit={submit} user={setUserfield} password={setPassword} />}/>
+        <Route exact path="/register" render={() =><Login users={user} submit={register} user={setUserfield} password={setPassword} />}/>
+
       </Router>
       
     </div>

@@ -18,21 +18,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Login = (props) =>{
-
+const Register = (props) =>{
 
     
 
     const classes = useStyles()
     
-    console.log(props)
+
     return(
     <form className={classes.root} noValidate autoComplete="off">
         <>
         {Object.keys(props.users).length !== 0 ?<Redirect to="/" /> :null}
       <TextField onChange={(e)=>props.user(e.target.value)} id="standard-basic" label="Email" />
       <TextField onChange={(e)=>props.password(e.target.value)} id="standard-basic" label="Password" />
-      <Button onClick={props.submit}>Submit</Button>
+      <Button onClick={props.submit}>Login</Button>
       </>
  
     </form>
@@ -43,4 +42,4 @@ const Login = (props) =>{
 }
 
 
-export default Login
+export default Register
