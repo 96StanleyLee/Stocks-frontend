@@ -153,7 +153,7 @@ function PersistentDrawerLeft(props) {
     props.history.push(`/login`)
   }
 
-  const redirectReigster = () =>{
+  const redirectRegister = () =>{
     props.history.push(`/register`)
   }
 
@@ -219,7 +219,7 @@ function PersistentDrawerLeft(props) {
         <List>
           {Object.keys(props.user).length === 0? 
                     <>
-                    <ListItem><Link to ='/register'><Button color="inherit">Register</Button></Link></ListItem>
+                    <ListItem><Button onClick={redirectRegister} color="inherit">Register</Button></ListItem>
                     <ListItem><Button onClick={redirectLogin} color="inherit">Login</Button></ListItem>
                     </>
               :<ListItem><Button  color="inherit" onClick={props.logout}>Logout</Button></ListItem>}

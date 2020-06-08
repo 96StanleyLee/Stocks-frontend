@@ -43,6 +43,7 @@ function App() {
     const autoLogin = async()=>{
       let token = Cookies.get('token')
       let data = {token}
+      console.log(data)
       let response =  await axios.post('http://localhost:4000/autologin',data)
       setUser(response.data)
     }
@@ -50,7 +51,14 @@ function App() {
   },[])
 
 
-  const register = () =>{
+  const register = async () =>{
+
+    let body = {email: userfield, password: password}
+
+    let response = await axios.post('http://localhost:4000/register', body)
+    let data =  response.body
+
+    console.log(data)
 
 
   }
