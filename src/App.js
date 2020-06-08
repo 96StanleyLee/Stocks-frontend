@@ -33,10 +33,9 @@ function App() {
 
   const logout = async () =>{
     let token = Cookies.get('token')
-    console.log(token)
-    // Cookies.remove('token')
+    Cookies.remove('token')
     let response = await axios.post('http://localhost:4000/logout', {token})
-    console.log(response)
+    setUser({})
   }
 
   useEffect(()=>{
