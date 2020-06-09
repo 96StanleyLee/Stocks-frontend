@@ -42,26 +42,37 @@ function App() {
     const autoLogin = async()=>{
       let token = Cookies.get('token')
       let data = {token}
-      console.log(data)
-      let response =  await axios.post('http://localhost:4000/autologin',data)
+      let response 
+      if(token){
+      response =  await axios.post('http://localhost:4000/autologin',data)
       setUser(response.data)
+    }
+      
     }
     autoLogin()
   },[])
 
 
   const register = async () =>{
-
     let body = {email: userfield, password: password}
-
     let response = await axios.post('http://localhost:4000/register', body)
     let data =  response.body
+  }
 
-    console.log(data)
+
+  const addToPortfolio = async (stock) =>{
+    
+
+
+
+    let response = await axios.post('http://localhost:4000/add', {stock, user})
+    
+    
+    console.log(response)
+
 
 
   }
-
   
 
 
@@ -69,8 +80,8 @@ function App() {
     <div className="App">
       <Router>
         <Route path="/" render={ routeProps => <Menu {...routeProps} logout={logout} user={user} setStock={setStock}/>}/>
-        <Route exact path="/" render={routeProps => <Main stock="GOOGL"/>}/>
-        <Route exact path="/stocks/:id" render={ routeProps => <Main {...routeProps} stock={stock}/>}/>
+        <Route exact path="/" render={routeProps => <Main stock="GOOGL" user={user} add={addToPortfolio}/> }/>
+        <Route exact path="/stocks/:id" render={ routeProps => <Main {...routeProps} stock={stock} add={addToPortfolio} user={user}/>}/>
         <Route exact path="/login" render={() =><Login users={user} submit={submit} user={setUserfield} password={setPassword} />}/>
         <Route exact path="/register" render={() =><Login users={user} submit={register} user={setUserfield} password={setPassword} />}/>
 

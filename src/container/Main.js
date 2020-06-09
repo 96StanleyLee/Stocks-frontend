@@ -1,6 +1,8 @@
 //7DNK3UZB58TIL716
 import React, {useEffect, useState} from 'react'
 import Chart from 'react-apexcharts'
+import Button from '@material-ui/core/Button';
+
 
 const Main = (props) =>{
 
@@ -12,12 +14,18 @@ const Main = (props) =>{
 
 
 
+
+
   
 
     useEffect(()=>{
     const grabStock = async ()=>{
-            console.log(props)
-            let data = await fetch(`https://api.twelvedata.com/time_series?symbol=${props.stock}&interval=1day&apikey=42fc1c23cb4e45fead5a847310693625`)
+            let stock = props.stock
+            if(!props.stock){
+                stock = props.match.params.id
+            }
+
+            let data = await fetch(`https://api.twelvedata.com/time_series?symbol=${stock}&interval=1day&apikey=42fc1c23cb4e45fead5a847310693625`)
             let json = await data.json()
             if(json.status === "ok"){
                 setValid(true)
@@ -75,10 +83,9 @@ const Main = (props) =>{
     if(stock.meta !== undefined){
         close = parseFloat(stock.values[0].close) > parseFloat(stock.values[0].open)? {color :'green'}: {color: 'red'}
     }
-
- 
    
 
+    console.log(props)
  
     return(
         <>
@@ -86,6 +93,7 @@ const Main = (props) =>{
         {stock.meta !== undefined?
         <>
         <h1> {stock.meta.symbol} </h1>
+        {Object.keys(props.user).length > 0 ? <Button variant="contained" onClick={()=>props.add(stock.meta.symbol)}>Add to Portfolio</Button>:null}
         <h2> Last Refreshed: {stock.values[0].datetime} </h2> 
         <h3> Opening: {stock.values[0].open} </h3>
         <h3 style={close}> Closing: {stock.values[0].close} </h3>
