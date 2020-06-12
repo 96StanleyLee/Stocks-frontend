@@ -17,6 +17,7 @@ function App() {
   const [user, setUser] = React.useState({})
   const[userfield, setUserfield] = React.useState('')
   const[password, setPassword] = React.useState('')
+  const [portfolio, setPortfolio] = React.useState({})
 
   const submit = async () =>{
     let data = {email: userfield, password: password}
@@ -52,6 +53,15 @@ function App() {
     autoLogin()
   },[])
 
+  useEffect(()=>{
+    const fetchPortfolio = async()=>{
+      let response = await axios.get('http://localhost:4000/portfolio', user)
+      setPortfolio(response.data)
+    }
+
+    if(user) fetchPortfolio()
+
+  })
 
   const register = async () =>{
     let body = {email: userfield, password: password}

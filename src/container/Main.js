@@ -85,7 +85,6 @@ const Main = (props) =>{
     }
    
 
-    console.log(props)
  
     return(
         <>
