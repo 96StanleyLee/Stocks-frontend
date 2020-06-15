@@ -30,7 +30,10 @@ const Main = (props) =>{
             let json = await data.json()
             if(json.status === "ok"){
                 setValid(true)
+                setCurrent(false)
                 setStock(json)
+                
+
             }
             else{
                 setValid(false)
@@ -38,7 +41,7 @@ const Main = (props) =>{
     }
     
     grabStock()
-    },[])
+    },[props.stock])
 
 
     useEffect(()=>{
@@ -93,11 +96,12 @@ const Main = (props) =>{
 
     const filter = () =>{
         let test 
-        if(props.currentPortfolio.length>0 && props.stock){
+        if(props.currentPortfolio.length>0 && Object.keys(stock).length>0){
         test = props.currentPortfolio.filter((result) =>{
             return result.ticker === stock.meta.symbol
         })
         if(test.length>0){
+            console.log('test')
             setCurrent(true)
         }
       }
@@ -108,16 +112,19 @@ const Main = (props) =>{
 
     
  
-   
+    console.log(current)
+
     return(
         <>
         {valid === false? <h1> This stock doesn't exist!</h1> :null}
         {stock.meta !== undefined?
         <>
         <h1> {stock.meta.symbol} </h1>
-        {Object.keys(props.user).length > 0 ? (
-            current ? <Button variant="contained" color="secondary">Remove from Portfolio</Button>:<Button variant="contained" onClick={()=>props.add(stock.meta.symbol)}>Add to Portfolio!</Button>
+
+        {Object.keys(props.user).length > 0 && valid? (
+            current ? <Button variant="contained" onClick={()=>props.remove(stock.meta.symbol)} color="secondary">Remove from Portfolio</Button>:<Button variant="contained" onClick={()=>props.add(stock.meta.symbol)}>Add to Portfolio!</Button>
         ):null}
+       
         <h2> Last Refreshed: {stock.values[0].datetime} </h2> 
         <h3> Opening: {stock.values[0].open} </h3>
         <h3 style={close}> Closing: {stock.values[0].close} </h3>

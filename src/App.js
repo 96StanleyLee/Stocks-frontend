@@ -76,13 +76,20 @@ function App() {
   }
   
 
+  const removeFromPortfolio = async (stock) =>{
+    let tester = {user, stock}
+    let response = await axios.delete('http://localhost:4000/delete', {data: tester})
+    
+
+  }
+
 
   return (
     <div className="App">
       <Router>
         <Route path="/" render={ routeProps => <Menu {...routeProps} logout={logout} user={user} setStock={setStock}/>}/>
-        <Route exact path="/" render={routeProps => <Main stock="GOOGL" user={user} add={addToPortfolio} currentPortfolio={portfolio}/> }/>
-        <Route exact path="/stocks/:id" render={ routeProps => <Main {...routeProps} stock={stock} add={addToPortfolio} user={user} currentPortfolio={portfolio}/>}/>
+        <Route exact path="/" render={routeProps => <Main stock="GOOGL" user={user} remove={removeFromPortfolio} add={addToPortfolio} currentPortfolio={portfolio}/> }/>
+        <Route exact path="/stocks/:id" render={ routeProps => <Main {...routeProps} stock={stock} remove={removeFromPortfolio} add={addToPortfolio} user={user} currentPortfolio={portfolio}/>}/>
         <Route exact path="/login" render={() =><Login users={user} submit={submit} user={setUserfield} password={setPassword} />}/>
         <Route exact path="/register" render={() =><Login users={user} submit={register} user={setUserfield} password={setPassword} />}/>
 
