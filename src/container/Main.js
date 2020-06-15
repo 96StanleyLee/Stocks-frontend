@@ -11,6 +11,7 @@ const Main = (props) =>{
     const [chart, setChart] = useState([])
     const [options,setOptions] = useState({})
     const [valid, setValid] = useState(true)
+    const [current, setCurrent] = useState(false)
 
 
 
@@ -25,7 +26,7 @@ const Main = (props) =>{
                 stock = props.match.params.id
             }
 
-            let data = await fetch(`https://api.twelvedata.com/time_series?symbol=${stock}&interval=1day&apikey=42fc1c23cb4e45fead5a847310693625`)
+            let data = await fetch(`https://api.twelvedata.com/time_series?symbol=${stock}&interval=1day&apikey=f13f1aa5682d46e098172a34c233cd20`)
             let json = await data.json()
             if(json.status === "ok"){
                 setValid(true)
@@ -35,9 +36,14 @@ const Main = (props) =>{
                 setValid(false)
             }
     }
+    
     grabStock()
-    },[props])
+    },[])
 
+
+    useEffect(()=>{
+        filter()
+    },[stock])
 
 
 
@@ -85,14 +91,33 @@ const Main = (props) =>{
     }
    
 
+    const filter = () =>{
+        let test 
+        if(props.currentPortfolio.length>0 && props.stock){
+        test = props.currentPortfolio.filter((result) =>{
+            return result.ticker === stock.meta.symbol
+        })
+        if(test.length>0){
+            setCurrent(true)
+        }
+      }
+      
+    }
+
+
+
+    
  
+   
     return(
         <>
         {valid === false? <h1> This stock doesn't exist!</h1> :null}
         {stock.meta !== undefined?
         <>
         <h1> {stock.meta.symbol} </h1>
-        {Object.keys(props.user).length > 0 ? <Button variant="contained" onClick={()=>props.add(stock.meta.symbol)}>Add to Portfolio</Button>:null}
+        {Object.keys(props.user).length > 0 ? (
+            current ? <Button variant="contained" color="secondary">Remove from Portfolio</Button>:<Button variant="contained" onClick={()=>props.add(stock.meta.symbol)}>Add to Portfolio!</Button>
+        ):null}
         <h2> Last Refreshed: {stock.values[0].datetime} </h2> 
         <h3> Opening: {stock.values[0].open} </h3>
         <h3 style={close}> Closing: {stock.values[0].close} </h3>

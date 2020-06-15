@@ -22,8 +22,6 @@ function App() {
   const submit = async () =>{
     let data = {email: userfield, password: password}
     let response = await axios.post('http://localhost:4000/login',data)
-
-    //let data = await response.json()
     if(response.data){
       setUser(response.data.user)
       Cookies.set('token', response.data.token, {expires: 7})
@@ -59,9 +57,10 @@ function App() {
       setPortfolio(response.data)
     }
 
-    if(user) fetchPortfolio()
-
-  })
+    if(user){
+      fetchPortfolio()
+    }
+  },[])
 
   const register = async () =>{
     let body = {email: userfield, password: password}
@@ -72,16 +71,8 @@ function App() {
 
   const addToPortfolio = async (stock) =>{
     
-
-
-
     let response = await axios.post('http://localhost:4000/add', {stock, user})
-    
-    
     console.log(response)
-
-
-
   }
   
 
@@ -90,8 +81,8 @@ function App() {
     <div className="App">
       <Router>
         <Route path="/" render={ routeProps => <Menu {...routeProps} logout={logout} user={user} setStock={setStock}/>}/>
-        <Route exact path="/" render={routeProps => <Main stock="GOOGL" user={user} add={addToPortfolio}/> }/>
-        <Route exact path="/stocks/:id" render={ routeProps => <Main {...routeProps} stock={stock} add={addToPortfolio} user={user}/>}/>
+        <Route exact path="/" render={routeProps => <Main stock="GOOGL" user={user} add={addToPortfolio} currentPortfolio={portfolio}/> }/>
+        <Route exact path="/stocks/:id" render={ routeProps => <Main {...routeProps} stock={stock} add={addToPortfolio} user={user} currentPortfolio={portfolio}/>}/>
         <Route exact path="/login" render={() =><Login users={user} submit={submit} user={setUserfield} password={setPassword} />}/>
         <Route exact path="/register" render={() =><Login users={user} submit={register} user={setUserfield} password={setPassword} />}/>
 
