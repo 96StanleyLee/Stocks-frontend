@@ -54,11 +54,13 @@ function App() {
   useEffect(()=>{
     const fetchPortfolio = async()=>{
       let response = await axios.get('http://localhost:4000/portfolio', user)
+      console.log(response.data)
       setPortfolio(response.data)
     }
 
     if(user){
       fetchPortfolio()
+      
     }
   },[])
 
@@ -72,16 +74,29 @@ function App() {
   const addToPortfolio = async (stock) =>{
     
     let response = await axios.post('http://localhost:4000/add', {stock, user})
+
+    // let x = [...portfolio]
+
+    // console.log(x)
+
     console.log(response)
   }
   
 
-  const removeFromPortfolio = async (stock) =>{
-    let tester = {user, stock}
+  const removeFromPortfolio = async (stocks) =>{
+    let tester = {user, stocks}
     let response = await axios.delete('http://localhost:4000/delete', {data: tester})
-    
+    let x = [...portfolio]
 
+    x = x.filter(stock => {
+      return stock.ticker !== stocks
+    })
+
+    setPortfolio(x)
+    
+    console.log(x)
   }
+
 
 
   return (

@@ -21,19 +21,16 @@ const Main = (props) =>{
 
     useEffect(()=>{
     const grabStock = async ()=>{
+            setCurrent(false)
             let stock = props.stock
             if(!props.stock){
                 stock = props.match.params.id
             }
-
             let data = await fetch(`https://api.twelvedata.com/time_series?symbol=${stock}&interval=1day&apikey=f13f1aa5682d46e098172a34c233cd20`)
             let json = await data.json()
             if(json.status === "ok"){
-                setValid(true)
-                setCurrent(false)
+                setValid(true)    
                 setStock(json)
-                
-
             }
             else{
                 setValid(false)
@@ -41,12 +38,12 @@ const Main = (props) =>{
     }
     
     grabStock()
-    },[props.stock])
+    },[props.stock, props.currentPortfolio])
 
 
     useEffect(()=>{
         filter()
-    },[stock])
+    },[stock, props.currentPortfolio])
 
 
 
@@ -122,7 +119,7 @@ const Main = (props) =>{
         <h1> {stock.meta.symbol} </h1>
 
         {Object.keys(props.user).length > 0 && valid? (
-            current ? <Button variant="contained" onClick={()=>props.remove(stock.meta.symbol)} color="secondary">Remove from Portfolio</Button>:<Button variant="contained" onClick={()=>props.add(stock.meta.symbol)}>Add to Portfolio!</Button>
+            current ? <Button variant="contained" onClick={()=>(props.remove(stock.meta.symbol))} color="secondary">Remove from Portfolio</Button>:<Button variant="contained" onClick={()=>(props.add(stock.meta.symbol))}>Add to Portfolio!</Button>
         ):null}
        
         <h2> Last Refreshed: {stock.values[0].datetime} </h2> 
