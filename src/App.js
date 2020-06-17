@@ -75,11 +75,12 @@ function App() {
     
     let response = await axios.post('http://localhost:4000/add', {stock, user})
 
-    // let x = [...portfolio]
-
-    // console.log(x)
-
     console.log(response)
+    let x = [...portfolio]
+    x.push(response.data.stocks[0])
+
+    setPortfolio(x)
+  
   }
   
 
