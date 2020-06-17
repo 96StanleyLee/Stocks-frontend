@@ -73,7 +73,7 @@ function App() {
 
   const addToPortfolio = async (stock) =>{
     
-    let response = await axios.post('http://localhost:4000/add', {stock, user})
+    let response = await axios.post('http://localhost:4000/portfolio', {stock, user})
 
     console.log(response)
     let x = [...portfolio]
