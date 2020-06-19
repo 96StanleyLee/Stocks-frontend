@@ -77,9 +77,10 @@ function App() {
 
     console.log(response)
     let x = [...portfolio]
-    x.push(response.data.stocks[0])
-
+    x.push(response.data)
+    console.log(x)
     setPortfolio(x)
+  
   
   }
   

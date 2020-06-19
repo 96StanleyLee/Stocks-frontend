@@ -36,6 +36,7 @@ const Portfolio = (props) =>{
 
     let [portfolio, setPortfolio] = useState([])
     let [rows, setRows] = useState([])
+    let [loading, setLoading] = useState(false)
 
 
     const createRows = () =>{
