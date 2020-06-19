@@ -4,6 +4,7 @@ import Menu from './container/Menu'
 import Main from './container/Main'
 import Login from './container/Login'
 import Register from './container/Register'
+import Portfolio from './container/Portfolio'
 import axios from 'axios';
 import {
   BrowserRouter as Router,
@@ -108,6 +109,8 @@ function App() {
         <Route exact path="/stocks/:id" render={ routeProps => <Main {...routeProps} stock={stock} remove={removeFromPortfolio} add={addToPortfolio} user={user} currentPortfolio={portfolio}/>}/>
         <Route exact path="/login" render={() =><Login users={user} submit={submit} user={setUserfield} password={setPassword} />}/>
         <Route exact path="/register" render={() =><Login users={user} submit={register} user={setUserfield} password={setPassword} />}/>
+        <Route exact path="/portfolio" render={() =><Portfolio portfolio={portfolio}/>}/>
+
 
       </Router>
       
