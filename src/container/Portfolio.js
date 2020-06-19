@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,8 +14,8 @@ const useStyles = makeStyles({
     },
   });
   
-  function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
+  function createData(ticker, current, previous, change) {
+    return { ticker, current, previous, change};
   }
   
   const rows = [
@@ -27,11 +27,37 @@ const useStyles = makeStyles({
   ];
 
 
-const Portfolio = () =>{
+const Portfolio = (props) =>{
     const classes = useStyles();
 
+    let [portfolio, setPortfolio] = useState([])
+
+    useEffect(() =>{
+      
+      const fetchStock = async () =>{
+        let array = []
+        if(props.portfolio.length > 0 ){
+          for(let i = 0; i<props.portfolio.length; i++){
+            console.log('test!!!!')
+            let data = await fetch(`https://api.twelvedata.com/time_series?symbol=${props.portfolio[i].ticker}&interval=1min&apikey=f13f1aa5682d46e098172a34c233cd20`)
+            let secondData = await fetch(`https://api.twelvedata.com/time_series?symbol=${props.portfolio[i].ticker}&interval=1day&apikey=f13f1aa5682d46e098172a34c233cd20`)
+            data = await data.json()
+            secondData = await secondData.json()
+            console.log(data.values.close)
+            console.log(data)
+            array.push([data.meta.symbol,data.values[0].close,secondData.values[0].open])
+            setPortfolio(array)
+          }    
+        }
+      }
+
+      fetchStock()
+
+    },[props.portfolio])
 
 
+
+    console.log(portfolio)
 
     return(
         <TableContainer style={{margin:'auto',width: '80%'} }component={Paper}>
@@ -39,10 +65,10 @@ const Portfolio = () =>{
         <TableHead>
           <TableRow>
             <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell align="right">Ticker</TableCell>
+            <TableCell align="right">Current&nbsp;(g)</TableCell>
+            <TableCell align="right">Previous&nbsp;(g)</TableCell>
+            <TableCell align="right">Change&nbsp;(g)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

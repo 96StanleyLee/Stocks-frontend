@@ -55,7 +55,6 @@ function App() {
   useEffect(()=>{
     const fetchPortfolio = async()=>{
       let response = await axios.get('http://localhost:4000/portfolio', user)
-      console.log(response.data)
       setPortfolio(response.data)
     }
 
