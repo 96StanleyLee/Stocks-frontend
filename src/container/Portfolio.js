@@ -58,6 +58,7 @@ const Portfolio = (props) =>{
             let secondData = await fetch(`https://api.twelvedata.com/time_series?symbol=${props.portfolio[i].ticker}&interval=1day&apikey=f13f1aa5682d46e098172a34c233cd20`)
             data = await data.json()
             secondData = await secondData.json()
+            console.log(data)
             array.push([data.meta.symbol,data.values[0].close,secondData.values[0].open])
           }    
           setPortfolio(array)
@@ -83,10 +84,12 @@ const Portfolio = (props) =>{
       <Table  className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
+            <TableCell>Ticker</TableCell>
             {/* <TableCell align="right">Ticker</TableCell> */}
-            <TableCell align="right">Current&nbsp;(g)</TableCell>
-            <TableCell align="right">Previous&nbsp;(g)</TableCell>
+            <TableCell align="right">Current</TableCell>
+            <TableCell align="right">Previous</TableCell>
+            <TableCell align="right">Change</TableCell>
+
             {/* <TableCell align="right">Change&nbsp;(g)</TableCell> */}
           </TableRow>
         </TableHead>
@@ -99,7 +102,11 @@ const Portfolio = (props) =>{
               {/* <TableCell align="right">{row.ticker}</TableCell> */}
               <TableCell align="right">{row.current}</TableCell>
               <TableCell align="right">{row.previous}</TableCell>
-              {/* <TableCell align="right">{row.protein}</TableCell> */}
+              {row.current - row.previous > 1?
+                            <TableCell align="right" style={{color: 'green'}}>{(row.current - row.previous)} green </TableCell>
+                            :<TableCell align="right" style={{color: 'red'}}>{(row.current - row.previous)} red </TableCell>
+
+                          }
             </TableRow>
           ))}
         </TableBody>
