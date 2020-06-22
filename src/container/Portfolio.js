@@ -52,15 +52,14 @@ const Portfolio = (props) =>{
           setPortfolio(array)
           setLoading(false)
         }
-        createRows()
       }
 
       fetchStock()
     },[props.portfolio])
 
-    // useEffect(()=>{
-    //   createRows()
-    // },[portfolio])
+    useEffect(()=>{
+      createRows()
+    },[portfolio])
 
     
 
@@ -84,7 +83,7 @@ const Portfolio = (props) =>{
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" onClick={()=>props.history.push(`/stocks/${row.ticker}`)}>
                 {row.ticker}
               </TableCell>
               <TableCell align="right">{row.current}</TableCell>
@@ -92,7 +91,6 @@ const Portfolio = (props) =>{
               {row.current - row.previous > 1?
                             <TableCell align="right" style={{color: 'green'}}>{(row.current - row.previous).toFixed(4)}%</TableCell>
                             :<TableCell align="right" style={{color: 'red'}}>{(row.current - row.previous).toFixed(4)}%</TableCell>
-
                           }
             </TableRow>
           ))}

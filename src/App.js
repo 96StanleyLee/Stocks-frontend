@@ -109,7 +109,7 @@ function App() {
         <Route exact path="/stocks/:id" render={ routeProps => <Main {...routeProps} stock={stock} remove={removeFromPortfolio} add={addToPortfolio} user={user} currentPortfolio={portfolio}/>}/>
         <Route exact path="/login" render={() =><Login users={user} submit={submit} user={setUserfield} password={setPassword} />}/>
         <Route exact path="/register" render={() =><Login users={user} submit={register} user={setUserfield} password={setPassword} />}/>
-        <Route exact path="/portfolio" render={() =><Portfolio portfolio={portfolio}/>}/>
+        <Route exact path="/portfolio" render={routeProps =><Portfolio {...routeProps} portfolio={portfolio}/>}/>
 
 
       </Router>
