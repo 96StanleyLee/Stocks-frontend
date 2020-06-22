@@ -157,6 +157,10 @@ function PersistentDrawerLeft(props) {
     props.history.push(`/register`)
   }
 
+  const redirectPortfolio = () =>{
+    props.history.push(`/portfolio`)
+  }
+
 
   
 
@@ -229,6 +233,7 @@ function PersistentDrawerLeft(props) {
               <ListItemText primary={text} />
             </ListItem>
           ))}
+            <ListItem><Button onClick={redirectPortfolio} color="inherit">Portfolio</Button></ListItem>
         </List>
         <Divider />
       </Drawer>
