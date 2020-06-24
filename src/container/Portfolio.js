@@ -78,6 +78,7 @@ const Portfolio = (props) =>{
             <TableCell align="right">Current</TableCell>
             <TableCell align="right">Previous</TableCell>
             <TableCell align="right">Change</TableCell>
+            <TableCell align="right">Graph Test</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -92,6 +93,7 @@ const Portfolio = (props) =>{
                             <TableCell align="right" style={{color: 'green'}}>{(row.current - row.previous).toFixed(4)}%</TableCell>
                             :<TableCell align="right" style={{color: 'red'}}>{(row.current - row.previous).toFixed(4)}%</TableCell>
                           }
+              <TableCell align="right">Test Graph Click!</TableCell>
             </TableRow>
           ))}
         </TableBody>
