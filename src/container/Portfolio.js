@@ -7,6 +7,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {
+  BrowserRouter as Router,
+  Route, Redirect
+} from "react-router-dom";
 
 const useStyles = makeStyles({
     table: {
@@ -61,15 +65,14 @@ const Portfolio = (props) =>{
       createRows()
     },[portfolio])
 
-    
-
-
 
     
-
-
+    
+  
     return(
-      <>{loading? <div class="lds-ring"><div></div><div></div><div></div><div></div></div>:
+      <>
+      {loading? 
+      <div class="lds-ring"><div></div><div></div><div></div><div></div></div>:
         <TableContainer style={{margin: 'auto',width: '80%'} }component={Paper}>
       <Table  className={classes.table} aria-label="simple table">
         <TableHead>
@@ -99,7 +102,10 @@ const Portfolio = (props) =>{
         </TableBody>
       </Table>
     </TableContainer>
+   
 }
+      {Object.keys(props.users).length !== 0 ?<Redirect to="/" /> :null}
+
     </>
     )
 }
