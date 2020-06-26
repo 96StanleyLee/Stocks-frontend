@@ -53,8 +53,10 @@ function App() {
 
   useEffect(()=>{
     const fetchPortfolio = async()=>{
-      let response = await axios.get('http://localhost:4000/portfolio', user)
       console.log(user)
+      let response = await axios.get('http://localhost:4000/portfolio', {params: user})
+      
+      
       setPortfolio(response.data)
     }
 
@@ -62,7 +64,7 @@ function App() {
       fetchPortfolio()
       
     }
-  },[])
+  },[user])
 
   const register = async () =>{
     let body = {email: userfield, password: password}

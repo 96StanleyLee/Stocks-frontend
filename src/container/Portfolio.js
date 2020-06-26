@@ -11,6 +11,8 @@ import {
   BrowserRouter as Router,
   Route, Redirect
 } from "react-router-dom";
+import Cookies from 'js-cookie'
+
 
 const useStyles = makeStyles({
     table: {
@@ -21,6 +23,8 @@ const useStyles = makeStyles({
   function createData(ticker, current, previous, change) {
     return { ticker, current, previous, change};
   }
+
+
   
 
 const Portfolio = (props) =>{
@@ -68,9 +72,12 @@ const Portfolio = (props) =>{
 
     
     
+    
   
     return(
       <>
+      {Cookies.get('token') === undefined ?<Redirect to="/" /> :null}
+
       {loading? 
       <div class="lds-ring"><div></div><div></div><div></div><div></div></div>:
         <TableContainer style={{margin: 'auto',width: '80%'} }component={Paper}>
@@ -104,7 +111,6 @@ const Portfolio = (props) =>{
     </TableContainer>
    
 }
-      {Object.keys(props.users).length !== 0 ?<Redirect to="/" /> :null}
 
     </>
     )
