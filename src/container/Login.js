@@ -20,14 +20,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = (props) =>{
 
-
     
-
     const classes = useStyles()
-    
     console.log(props)
     return(
     <form className={classes.root} noValidate autoComplete="off">
+      <h1 style={{margin: 'auto'}}>{props.match.path === "/register"? 'Register':'Login'}</h1>
         <>
         {Object.keys(props.users).length !== 0 ?<Redirect to="/" /> :null}
       <TextField onChange={(e)=>props.user(e.target.value)} id="standard-basic" label="Email" />

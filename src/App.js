@@ -109,8 +109,8 @@ function App() {
         <Route path="/" render={ routeProps => <Menu {...routeProps} logout={logout} user={user} setStock={setStock}/>}/>
         <Route exact path="/" render={routeProps => <Main stock="GOOGL" user={user} remove={removeFromPortfolio} add={addToPortfolio} currentPortfolio={portfolio}/> }/>
         <Route exact path="/stocks/:id" render={ routeProps => <Main {...routeProps} stock={stock} remove={removeFromPortfolio} add={addToPortfolio} user={user} currentPortfolio={portfolio}/>}/>
-        <Route exact path="/login" render={() =><Login users={user} submit={submit} user={setUserfield} password={setPassword} />}/>
-        <Route exact path="/register" render={() =><Login users={user} submit={register} user={setUserfield} password={setPassword} />}/>
+        <Route exact path="/login" render={routeProps =><Login {...routeProps} users={user} submit={submit} user={setUserfield} password={setPassword} />}/>
+        <Route exact path="/register" render={routeProps =><Login {...routeProps} users={user} submit={register} user={setUserfield} password={setPassword} />}/>
         <Route exact path="/portfolio" render={routeProps =><Portfolio {...routeProps} users={user} portfolio={portfolio}/>}/>
 
 
