@@ -1,68 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Stocks
 
-## Available Scripts
+This project was made as a way for me to practice learning new technologies such as MongoDB and running a Node.js/Express server. 
 
-In the project directory, you can run:
+At first, I wasn't too sure what I wanted to create. So I kind of went along with recreating my Mod 1 Project at Flatiron, this time it'll have a real GUI and authentication!
 
-### `yarn start`
+## Technologies Used
+ - React
+ - Node.JS
+ - MongoDB
+ - Express
+ - JWT
+ 
+This was one of my first projects after graduating so learning a whole new backend by myself was definitely fun but at the same time confusing.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![](https://i.imgur.com/rccCg0s.png)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The main page shows a random stock that allows users to add to their portfolio. It includes a candlestick chart. 
 
-### `yarn test`
+From the searchbar, users can search other stocks and be presented with the same screen.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+On the portfolio screen, users are presented with a table of their stocks, change in percentage, and the current price/closing of yesterdays price. If users click the name of the stock they are taken to the presentation page of the stock once again.
 
-### `yarn build`
+![](https://i.imgur.com/MfBfc9h.png)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
