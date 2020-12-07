@@ -37,7 +37,6 @@
   }
 }
 
-
 .lds-ring {
   display: inline-block;
   position: relative;
@@ -72,4 +71,11 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
